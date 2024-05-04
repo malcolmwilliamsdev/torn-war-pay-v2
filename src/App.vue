@@ -31,14 +31,12 @@ const warReport = ref(null)
 const warChainReports = ref([])
 const totalHits = ref(0)
 const totalScore = ref(0)
-
-const isLoading = ref(false)
-
 const playerList = ref([])
 
 //toggles
 const showHitExplanation = ref(false)
 const showTable = ref(false)
+const isLoading = ref(false)
 
 //settings
 const paymentMethodIndex = ref(readPaymentMethod())
@@ -129,24 +127,6 @@ const table = reactive({
     }
   ]
 })
-
-function doSearch(offset, limit, order, sort) {
-  var rows = playerList.value.sort((a, b) => {
-    if (typeof a[order] === 'string') {
-      // String comparison
-      return sort === 'asc' ? a[order].localeCompare(b[order]) : b[order].localeCompare(a[order])
-    } else {
-      // Number comparison
-      return sort === 'asc' ? a[order] - b[order] : b[order] - a[order]
-    }
-  })
-
-  rows = rows.slice(offset, offset + limit)
-
-  table.rows = rows
-  table.sortable.order = order
-  table.sortable.sort = sort
-}
 //#endregion
 
 //#region read storage funcs
@@ -216,6 +196,24 @@ function writeMemberSplit() {
   localStorage.setItem(STOREITEM_MEMBERSPLIT, memberSplit.value)
 }
 //#endregion
+
+function doSearch(offset, limit, order, sort) {
+  var rows = playerList.value.sort((a, b) => {
+    if (typeof a[order] === 'string') {
+      // String comparison
+      return sort === 'asc' ? a[order].localeCompare(b[order]) : b[order].localeCompare(a[order])
+    } else {
+      // Number comparison
+      return sort === 'asc' ? a[order] - b[order] : b[order] - a[order]
+    }
+  })
+
+  rows = rows.slice(offset, offset + limit)
+
+  table.rows = rows
+  table.sortable.order = order
+  table.sortable.sort = sort
+}
 
 function toggleHitExplanation() {
   showHitExplanation.value = !showHitExplanation.value

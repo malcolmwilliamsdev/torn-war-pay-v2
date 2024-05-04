@@ -5,7 +5,8 @@ async function fetchJSON(url) {
     const parsed = await response.json()
     return parsed
   } catch (error) {
-    console.log('error', error)
+    console.error('error', error)
+    alert('Error: ', error)
   }
 }
 
@@ -33,16 +34,6 @@ export async function getFactionChainReports(apiKey, warReport, factionID) {
 }
 //#endregion
 
-/*
-export function getFactionIDs(warReport) {
-  return Object.keys(warReport.factions)
-}
-
-export function getFactionName(warReport, factionID) {
-  return warReport.factions[factionID].name
-}
-*/
-
 export function getFactionScore(warReport, factionID) {
   return warReport.factions[factionID].score
 }
@@ -57,6 +48,7 @@ export function getFactionChainAttacks(warReport, chainReportList, factionID) {
 
   for (var memberID in members) {
     chainReportList.forEach((chainReport) => {
+      // do i need a try here?
       try {
         const memberData = chainReport.members[memberID]
         totalChainAttacks += memberData.attacks - memberData.war
@@ -80,17 +72,13 @@ export function getPlayerList(
   chainPayPercent,
   payMethod
 ) {
-  //const totalFactionHits =
-  //  getFactionWarAttacks(warReport, factionID) +
-  //  getFactionChainAttacks(warReport, chainReportList, factionID)
-  //const totalFactionScore = getFactionScore(warReport, factionID)
-
   const members = warReport.factions[factionID]['members']
   var playerList = []
 
   for (var memberID in members) {
     var memberChainHits = 0
     chainReportList.forEach((chainReport) => {
+      // do i need a try here?
       try {
         var memberData = chainReport.members[memberID]
         memberChainHits += memberData.attacks - memberData.war
