@@ -10,7 +10,7 @@ import {
   getFactionChainAttacks,
   getFactionScore,
   getPlayerList
-} from '/torn-war-pay-v2/src/torn'
+} from '@/torn'
 
 //#region store items
 const STOREITEM_APIKEY = 'api-key'
