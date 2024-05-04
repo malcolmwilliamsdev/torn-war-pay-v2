@@ -51,6 +51,14 @@ const hitExplanationText = computed(() => {
   return showHitExplanation.value ? 'Hide' : 'Show'
 })
 
+const factionSplitText = computed(() => {
+  return ((payoutTotal.value * factionSplit.value) / 100).toFixed(2)
+})
+
+const memberSplitText = computed(() => {
+  return ((payoutTotal.value * memberSplit.value) / 100).toFixed(2)
+})
+
 //table
 const table = reactive({
   columns: [
@@ -288,7 +296,7 @@ watch(warChainReports, () => {
 
 <template>
   <header>
-    <h1>Torn War Payout Helper</h1>
+    <h1>Ranked War Payout Tool</h1>
     <div>
       <span>Written by </span>
       <a href="https://www.torn.com/profiles.php?XID=2866181">Sixpathsmac[2866181]</a>
@@ -368,6 +376,9 @@ watch(warChainReports, () => {
       <input type="number" class="input-pay-split" v-model="factionSplit" />
       <label style="margin-right: 0.5em">To Members %</label>
       <input type="number" class="input-pay-split" v-model="memberSplit" />
+
+      <p>Faction Vault: ${{ factionSplitText }}</p>
+      <p>Member Pay: ${{ memberSplitText }}</p>
     </div>
 
     <h1>Pay Table</h1>
