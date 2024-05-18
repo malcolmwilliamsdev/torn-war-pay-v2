@@ -297,10 +297,6 @@ watch(warChainReports, () => {
 <template>
   <header>
     <h1>Ranked War Payout Tool</h1>
-    <div>
-      <span>Written by </span>
-      <a href="https://www.torn.com/profiles.php?XID=2866181">Sixpathsmac[2866181]</a>
-    </div>
     <label>Public API Key</label>
     <input id="api-key" type="text" v-model="apiKey" />
     <label>Faction ID</label>
